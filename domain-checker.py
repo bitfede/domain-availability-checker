@@ -21,7 +21,7 @@ for word in dictionary:
     word = word.rstrip()
     domain = '{}.com'.format(word)
     whoisresult = subprocess.check_output('whois {}'.format(domain), shell=True)
-    whoisresult = whoisresult.decode('ascii').split('\n')
+    whoisresult = whoisresult.decode('utf-8').split('\n')
     domainstatus = whoisresult[0].strip('   ')
     if "No match for" in domainstatus:
         #BINGO!
