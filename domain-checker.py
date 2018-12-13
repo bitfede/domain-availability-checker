@@ -7,8 +7,8 @@
 ##
 
 #dependencies
-import requests
 import subprocess
+import time
 
 #open the dictionary
 dictionary = open('google-10000-english.txt', 'r')
@@ -21,8 +21,11 @@ for word in dictionary:
     word = word.rstrip()
     domain = '{}.com'.format(word)
     whoisresult = subprocess.check_output('whois {}'.format(domain), shell=True)
+    time.sleep(1)
     whoisresult = whoisresult.decode('utf-8').split('\n')
     domainstatus = whoisresult[0].strip('   ')
+    if (count % 100 == 0):
+        print( "Checked {} domains".format(count ) )
     if "No match for" in domainstatus:
         #BINGO!
         print("[!!!] DOMAIN AVAILABLE: {}".format(domain))
